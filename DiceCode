@@ -24,7 +24,7 @@ main()
 
     // The following sequence is NEEDED to make sure every randomly generated number is different.
 printf("Enter your username!: ");
-scanf(" %s", name);
+gets(name);
 
 printf("%s, do you want to play on (E)asy, (M)edium, or (H)ard mode?\n\n", name);
 printf("Enter 'E', 'M', or 'H' to reflect your answer: ");
