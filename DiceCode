@@ -1,0 +1,416 @@
+// Ch20 Ex2, with some additions. This game rolls five dice, showing the user the value of three of them.
+// The user must then guess if the total of the next five dice rolled will be higher or lower than the first roll.
+
+// FileCh20Ex2.c
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+#include <ctype.h>
+
+main()
+
+{
+    int dice1, dice2, dice3, dice4, dice5;
+    int total1, total2;
+    time_t t;
+    char ans, again, mode;
+
+    int bank = 1000;
+    int bet;
+
+    // The following sequence is NEEDED to make sure every randomly generated number is different.
+
+printf("Do you want to play on (E)asy, (M)edium, or (H)ard mode?\n\n");
+printf("Enter 'E', 'M', or 'H' to reflect your answer: ");
+scanf(" %c", &mode);
+mode = toupper(mode);
+
+if (mode == 'E')
+{
+do {
+    srand(time(&t));
+
+    dice1 = (rand() % 5) + 1;
+    dice2 = (rand() % 5) + 1;
+    dice3 = (rand() % 5) + 1;
+    dice4 = (rand() % 5) + 1;
+    dice5 = (rand() % 5) + 1;
+
+    total1 = dice1 + dice2 + dice3 + dice4 + dice5;
+
+    printf("\n\n****------------HERE WE GO!!-------------****   Current balance: $%d\n", bank);
+    printf("\nThe first roll of five dice included a %d, a %d, a %d, and a %d (plus one mystery dice!).\n", dice1, dice2, dice3, dice4);
+
+    do {
+            puts("\nDo you think the total value of the next roll of all five dice will be (H)igher, (L)ower, or the (S)ame?");
+            puts("\nEnter H, L, or S to reflect your guess. Or 'Q' to exit.");
+
+            scanf(" %c", &ans);
+            ans = toupper(ans);
+
+            if (ans == 'Q')
+            {
+                exit(1);
+            }
+
+
+       }   while ((ans != 'H') && (ans != 'L') && (ans != 'S'));
+
+    // Roll the dice a second time to get your next total.
+
+    // Ask the user to place a bet on their guess.
+
+    printf("\nPlace your bet!!\n\n$");
+    scanf(" %d", &bet);
+
+    // Now roll the dice for the second time.
+
+    dice1 = (rand() % 5) + 1;
+    dice2 = (rand() % 5) + 1;
+    dice3 = (rand() % 5) + 1;
+    dice4 = (rand() % 5) + 1;
+    dice5 = (rand() % 5) + 1;
+    total2 = dice1 + dice2 + dice3 + dice4 + dice5;
+
+    printf("\n\nThe second roll of the dice had a total of %d.... \nand the total for the first roll was %d!!\n\n", total2, total1);
+
+    // Now compare the two dice totals against the users guess, and tell them if they were right.  Adjust bank.
+
+
+    if (ans == 'L')
+    {
+        if (total1 > total2)
+        {
+            printf("\nBINGO! You guessed correctly! %d is less than %d.\n", total2, total1);
+            bank = bank + bet;
+
+        }
+
+        else
+        {
+            printf("\nWRONG!! %d is not lower than %d!!", total2, total1);
+            bank = bank - bet;
+        }
+
+
+    }
+
+    else if (ans == 'H')
+    {
+        if (total1 < total2)
+        {
+            printf("\nBINGO! %d is higher than %d!\n", total2, total1);
+            bank = bank + bet;
+        }
+
+        else
+        {
+            printf("\nWRONG!! %d is not higher than %d.\n", total2, total1);
+            bank = bank - bet;
+        }
+    }
+
+    else if (ans == 'S')
+    {
+        if (total1 == total2)
+        {
+            printf("\nJACKPOT!! %d is the same as %d!\n", total2, total1);
+            bank = bank + (7*bet);
+        }
+
+        else
+        {
+            printf("WRONG. %d does not equal %d.\n", total2, total1);
+            bank = bank - bet;
+        }
+
+    }
+
+if (bank <= 0)
+{
+    printf("\n\n*************You're out of money!! GAME OVER!!*************\n\n");
+    exit(1);
+}
+
+// Give balance, ask user if they'd like to continue.
+
+printf("\nYour current balance is $%d.\n\n", bank);
+printf("\nDo you want to play again (y/n)?\n");
+scanf(" %c", &again);
+again = toupper(again);
+if (again == 'Y')
+    {
+        continue;
+    }
+
+else
+    {
+        exit(1);
+    }
+
+
+} while (bank > 0);
+}
+
+else if (mode == 'M')
+{
+do {
+    srand(time(&t));
+
+    dice1 = (rand() % 5) + 1;
+    dice2 = (rand() % 5) + 1;
+    dice3 = (rand() % 5) + 1;
+    dice4 = (rand() % 5) + 1;
+    dice5 = (rand() % 5) + 1;
+
+    total1 = dice1 + dice2 + dice3 + dice4 + dice5;
+
+    printf("\n\n****------------HERE WE GO!!-------------****   Current balance: $%d\n", bank);
+    printf("\nThe first roll of five dice included a %d, a %d, and a %d (plus two mystery dice!).\n", dice1, dice2, dice3);
+
+    do {
+            puts("\nDo you think the total value of the next roll of all five dice will be (H)igher, (L)ower, or the (S)ame?");
+            puts("\nEnter H, L, or S to reflect your guess. Or 'Q' to exit.");
+
+            scanf(" %c", &ans);
+            ans = toupper(ans);
+
+            if (ans == 'Q')
+            {
+                exit(1);
+            }
+
+
+       }   while ((ans != 'H') && (ans != 'L') && (ans != 'S'));
+
+    // Roll the dice a second time to get your next total.
+
+    // Ask the user to place a bet on their guess.
+
+    printf("\nPlace your bet!!\n\n$");
+    scanf(" %d", &bet);
+
+    // Now roll the dice for the second time.
+
+    dice1 = (rand() % 5) + 1;
+    dice2 = (rand() % 5) + 1;
+    dice3 = (rand() % 5) + 1;
+    dice4 = (rand() % 5) + 1;
+    dice5 = (rand() % 5) + 1;
+    total2 = dice1 + dice2 + dice3 + dice4 + dice5;
+
+    printf("\n\nThe second roll of the dice had a total of %d.... \nand the total for the first roll was %d!!\n\n", total2, total1);
+
+    // Now compare the two dice totals against the users guess, and tell them if they were right.  Adjust bank.
+
+
+    if (ans == 'L')
+    {
+        if (total1 > total2)
+        {
+            printf("\nBINGO! You guessed correctly! %d is less than %d.\n", total2, total1);
+            bank = bank + bet;
+
+        }
+
+        else
+        {
+            printf("\nWRONG!! %d is not lower than %d!!", total2, total1);
+            bank = bank - bet;
+        }
+
+
+    }
+
+else if (ans == 'H')
+    {
+        if (total1 < total2)
+        {
+            printf("\nBINGO! %d is higher than %d!\n", total2, total1);
+            bank = bank + bet;
+        }
+
+        else
+        {
+            printf("\nWRONG!! %d is not higher than %d.\n", total2, total1);
+            bank = bank - bet;
+        }
+    }
+
+    else if (ans == 'S')
+    {
+        if (total1 == total2)
+        {
+            printf("\nJACKPOT!! %d is the same as %d!\n", total2, total1);
+            bank = bank + (7*bet);
+        }
+
+        else
+        {
+            printf("WRONG. %d does not equal %d.\n", total2, total1);
+            bank = bank - bet;
+        }
+
+    }
+
+if (bank <= 0)
+{
+    printf("\n\n*************You're out of money!! GAME OVER!!*************\n\n");
+    exit(1);
+}
+
+// Give balance, ask user if they'd like to continue.
+
+printf("\nYour current balance is $%d.\n\n", bank);
+printf("\nDo you want to play again (y/n)?\n");
+scanf(" %c", &again);
+again = toupper(again);
+if (again == 'Y')
+    {
+        continue;
+    }
+
+else
+    {
+        exit(1);
+    }
+
+
+} while (bank > 0);
+
+}
+
+else if (mode == 'H')
+{
+do {
+    srand(time(&t));
+
+    dice1 = (rand() % 5) + 1;
+    dice2 = (rand() % 5) + 1;
+    dice3 = (rand() % 5) + 1;
+    dice4 = (rand() % 5) + 1;
+    dice5 = (rand() % 5) + 1;
+
+    total1 = dice1 + dice2 + dice3 + dice4 + dice5;
+
+    printf("\n\n****------------HERE WE GO!!-------------****   Current balance: $%d\n", bank);
+    printf("\nThe first roll of five dice included a %d, and a %d (plus three mystery dice!).\n", dice1, dice2);
+
+    do {
+            puts("\nDo you think the total value of the next roll of all five dice will be (H)igher, (L)ower, or the (S)ame?");
+            puts("\nEnter H, L, or S to reflect your guess. Or 'Q' to exit.");
+
+            scanf(" %c", &ans);
+            ans = toupper(ans);
+
+            if (ans == 'Q')
+            {
+                exit(1);
+            }
+
+
+       }   while ((ans != 'H') && (ans != 'L') && (ans != 'S'));
+
+    // Roll the dice a second time to get your next total.
+
+    // Ask the user to place a bet on their guess.
+
+    printf("\nPlace your bet!!\n\n$");
+    scanf(" %d", &bet);
+
+    // Now roll the dice for the second time.
+
+    dice1 = (rand() % 5) + 1;
+    dice2 = (rand() % 5) + 1;
+    dice3 = (rand() % 5) + 1;
+    dice4 = (rand() % 5) + 1;
+    dice5 = (rand() % 5) + 1;
+    total2 = dice1 + dice2 + dice3 + dice4 + dice5;
+
+    printf("\n\nThe second roll of the dice had a total of %d.... \nand the total for the first roll was %d!!\n\n", total2, total1);
+
+    // Now compare the two dice totals against the users guess, and tell them if they were right.  Adjust bank.
+
+
+    if (ans == 'L')
+    {
+        if (total1 > total2)
+        {
+            printf("\nBINGO! You guessed correctly! %d is less than %d.\n", total2, total1);
+            bank = bank + bet;
+
+        }
+
+        else
+        {
+            printf("\nWRONG!! %d is not lower than %d!!", total2, total1);
+            bank = bank - bet;
+        }
+
+
+    }
+
+    else if (ans == 'H')
+    {
+        if (total1 < total2)
+        {
+            printf("\nBINGO! %d is higher than %d!\n", total2, total1);
+            bank = bank + bet;
+        }
+
+        else
+        {
+            printf("\nWRONG!! %d is not higher than %d.\n", total2, total1);
+            bank = bank - bet;
+        }
+    }
+
+    else if (ans == 'S')
+    {
+        if (total1 == total2)
+        {
+            printf("\nJACKPOT!! %d is the same as %d!\n", total2, total1);
+            bank = bank + (7*bet);
+        }
+
+        else
+        {
+            printf("WRONG. %d does not equal %d.\n", total2, total1);
+            bank = bank - bet;
+        }
+
+    }
+
+if (bank <= 0)
+{
+    printf("\n\n*************You're out of money!! GAME OVER!!*************\n\n");
+    exit(1);
+}
+
+// Give balance, ask user if they'd like to continue.
+
+printf("\nYour current balance is $%d.\n\n", bank);
+printf("\nDo you want to play again (y/n)?\n");
+scanf(" %c", &again);
+again = toupper(again);
+if (again == 'Y')
+    {
+        continue;
+    }
+
+else
+    {
+        exit(1);
+    }
+
+
+} while (bank > 0);
+}
+
+
+    return 0;
+
+}
