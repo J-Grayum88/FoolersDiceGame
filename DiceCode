@@ -389,7 +389,7 @@ do {
 
 if (bank <= 0)
 {
-    printf("\n\n*************You're out of money!! GAME OVER %s!!*************\n\n", bank);
+    printf("\n\n*************You're out of money!! GAME OVER %s!!*************\n\n", name, bank);
     exit(1);
 }
 
