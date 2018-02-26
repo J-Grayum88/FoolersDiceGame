@@ -17,13 +17,16 @@ main()
     int total1, total2;
     time_t t;
     char ans, again, mode;
+    char name[25];
 
     int bank = 1000;
     int bet;
 
     // The following sequence is NEEDED to make sure every randomly generated number is different.
+printf("Enter your username!: ");
+scanf(" %s", name);
 
-printf("Do you want to play on (E)asy, (M)edium, or (H)ard mode?\n\n");
+printf("%s, do you want to play on (E)asy, (M)edium, or (H)ard mode?\n\n", name);
 printf("Enter 'E', 'M', or 'H' to reflect your answer: ");
 scanf(" %c", &mode);
 mode = toupper(mode);
@@ -41,7 +44,7 @@ do {
 
     total1 = dice1 + dice2 + dice3 + dice4 + dice5;
 
-    printf("\n\n****------------HERE WE GO!!-------------****   Current balance: $%d\n", bank);
+    printf("\n\n****------------HERE WE GO!!-------------****   %s's balance: $%d\n", name, bank);
     printf("\nThe first roll of five dice included a %d, a %d, a %d, and a %d (plus one mystery dice!).\n", dice1, dice2, dice3, dice4);
 
     do {
@@ -131,7 +134,7 @@ do {
 
 if (bank <= 0)
 {
-    printf("\n\n*************You're out of money!! GAME OVER!!*************\n\n");
+    printf("\n\n*************You're out of money!! GAME OVER %s!!*************\n\n", name);
     exit(1);
 }
 
@@ -168,7 +171,7 @@ do {
 
     total1 = dice1 + dice2 + dice3 + dice4 + dice5;
 
-    printf("\n\n****------------HERE WE GO!!-------------****   Current balance: $%d\n", bank);
+    printf("\n\n****------------HERE WE GO!!-------------****   %s's balance: $%d\n", name, bank);
     printf("\nThe first roll of five dice included a %d, a %d, and a %d (plus two mystery dice!).\n", dice1, dice2, dice3);
 
     do {
@@ -258,7 +261,7 @@ else if (ans == 'H')
 
 if (bank <= 0)
 {
-    printf("\n\n*************You're out of money!! GAME OVER!!*************\n\n");
+    printf("\n\n*************You're out of money!! GAME OVER %s!!*************\n\n", name);
     exit(1);
 }
 
@@ -296,7 +299,7 @@ do {
 
     total1 = dice1 + dice2 + dice3 + dice4 + dice5;
 
-    printf("\n\n****------------HERE WE GO!!-------------****   Current balance: $%d\n", bank);
+    printf("\n\n****------------HERE WE GO!!-------------****   %s's balance: $%d\n", name, bank);
     printf("\nThe first roll of five dice included a %d, and a %d (plus three mystery dice!).\n", dice1, dice2);
 
     do {
@@ -386,7 +389,7 @@ do {
 
 if (bank <= 0)
 {
-    printf("\n\n*************You're out of money!! GAME OVER!!*************\n\n");
+    printf("\n\n*************You're out of money!! GAME OVER %s!!*************\n\n", bank);
     exit(1);
 }
 
